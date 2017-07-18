@@ -1,11 +1,16 @@
+#this file is the maim file for GUI
+#tkinter library has been used for the GUI
+
+
 import Tkinter
 import ttk
+#importing functions from the functions.py file and the maintool.py file
 from function import  self ,get_self_media ,display_self_media , get_user_id ,get_user_media , display_umedia , fetch_comments,put_like ,post_comment
 from maintool import tag_media
 master=Tkinter.Tk()
 master.title('InstaBot')
 master.configure(background='black')
-#----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*
+#----*-----*----* Code for the GUI part of the self Details     -----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*
 self_frame=Tkinter.LabelFrame(master,text="Self",fg='blue',font=(None,20))
 self_frame.configure(background='black')
 self_frame.grid(row=7,column=0,padx=(30,30),pady=(10),)
@@ -19,7 +24,7 @@ media_no.grid(row=2,column=2,pady=(10))
 downld_self_media=Tkinter.Button(self_frame,text='Download',fg='red',command=lambda  :get_self_media(media_no.get())).grid(row=2,column=3,pady=(10))
 show_self_media=Tkinter.Button(self_frame,text='Show media',fg='red',command=lambda  : display_self_media(media_no.get()) ).grid(row=2,column=4,padx=(10),pady=(10))
 
-#----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*
+#----*-----*----*---Code for the Gui part of the user's details--*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*
 #----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*----*-----*
 
 user_frame=Tkinter.LabelFrame(master,text="User",fg='red',font=(None,20))
@@ -40,13 +45,13 @@ media_no2.grid(row=9,column=2,pady=(10))
 downld_user_media=Tkinter.Button(user_frame,text='Download',fg='green',command=lambda: get_user_media(username.get(),media_no2.get())).grid(row=9,column=3,pady=(10))
 show_user_media=Tkinter.Button(user_frame,text='Show media',fg='green',command=lambda : display_umedia(media_no2.get())).grid(row=9,column=4,padx=(10,10),pady=(10))
 commenttext=Tkinter.StringVar()
-fetch_comment=Tkinter.Button(user_frame,text='Fetch Comments',fg='green',command=lambda : fetch_comments(username.get(),media_no2.get())).grid(row=10,column=0,pady=(10),padx=(10))
+fetch_comment=Tkinter.Button(user_frame,text='View Comments',fg='green',command=lambda : fetch_comments(username.get(),media_no2.get())).grid(row=10,column=0,pady=(10),padx=(10))
 Tkinter.Label(user_frame,text='Post a Comment :',fg='green').grid(row=10,column=1, padx=(10,10),pady=(10))
 enter_commnt=Tkinter.Entry(user_frame,width=15,fg='green',textvariable=commenttext).grid(row=10,column=2,padx=(10,10),pady=(10))
 cmmnt_but=Tkinter.Button(user_frame,text='Post Comment',fg='green',command= lambda : post_comment(username.get(),media_no2.get(),commenttext.get())).grid(row=10,column=3,padx=(10,10),pady=(10))
 like_but =Tkinter.Button(user_frame,text='Like!!!',fg='green',command=lambda: put_like(username.get(),media_no2.get())).grid(row=10,column=4,padx=(10,10),pady=(10))
 
-#*-----*----*-----*----*-----*----*-----*--*-----*----*-----*----*-----*----*-----*--*-----*----*-----*----*-----*----*-----*--*-----*----*-----*----*-----*----*-----*--*-----*----*-----*----*-----*----*-----*--*-----*----*-----*----*-----*----*-----*--
+#*-----*----*-----*----*---GUI for the marketing tool part--*----*-----*--*-----*----*-----*----*-----*----*-----*--*-----*----*-----*----*-----*----*-----*--*-----*----*-----*----*-----*----*-----*--*-----*----*-----*----*-----*----*-----*--*-----*----*-----*----*-----*----*-----*--
 #*-----*----*-----*----*-----*----*-----*--*-----*----*-----*----*-----*----*-----*--*-----*----*-----*----*-----*----*-----*--*-----*----*-----*----*-----*----*-----*--*-----*----*-----*----*-----*----*-----*--*-----*----*-----*----*-----*----*-----*--
 main_frame=Tkinter.LabelFrame(master,text='Targeted Marketing tool',fg='green',font=(None,20))
 main_frame.configure(background='black')
@@ -66,3 +71,5 @@ start=Tkinter.Button(main_frame,text='Start',font=(None,15),fg='blue',command=la
 
 
 master.mainloop()
+
+#*-----*----*-----*----*-----*----*-----*--*-----*----*---*-----*----*-----*----*-----*----*-----*--*-----*----*---*---SKS--*----*-----*----*-----*----*-----*--*-----*----*---*-----*----*-----*----*-----*----*-----*--*-----*----*---*-----*----*-----*----*-----*----*-----*--*-----*----*---*-----*----*-----*----*-----*----*-----*--*-----*----*---

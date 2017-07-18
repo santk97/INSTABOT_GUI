@@ -2,13 +2,13 @@
 import requests
 import tkMessageBox
 
-
+#this file has the method of the main marketing tool
+#this method performs a search for  hashtag throughout the data , using one of the instagram's endpoint Api
 def tag_media(tag,comment):
 
     Access_token = '5697615882.a918ceb.8a12a664f5d84dff9d0b4802205e1d78'
     base = 'https://api.instagram.com/v1/'
-    #comment_text = raw_input('enter the comment you want to make ')
-    #tag=raw_input('enetr the tag you are searching for ')
+   #search for tags using the endpoint
     url = base +'tags/%s/media/recent?access_token=%s' %(tag,Access_token)
     print url
 
@@ -20,7 +20,7 @@ def tag_media(tag,comment):
         for i in range(rang):
 
             print media['data'][i]['images']['standard_resolution']['url']
-
+    #post comments on the media found in the results using another endpoint
             media_id=media['data'][i]['id']
             url = (base + 'media/%s/comments') % (media_id)
             payloads = {'access_token': Access_token, 'text': comment}
