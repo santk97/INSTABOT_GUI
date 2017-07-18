@@ -50,7 +50,7 @@ def display_self_media(i):
         print val
         branch.configure(background='black')
         canvas = Tkinter.Canvas(branch, width=1000, height=1000)
-        path = 'selfmedia_%s_.jpg' % (str(val))
+        path = 'selfmedia_%s_.jpg' % (str(i))
         canvas.pack()
         im = Image.open(path)
         im = im.convert('RGB')
