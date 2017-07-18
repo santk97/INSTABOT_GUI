@@ -16,7 +16,7 @@ def tag_media(tag,comment):
     if media['data'][0]['images']:
 
         rang=len(media['data'])
-        tkMessageBox.showinfo('Media Found','Total  media with the  tag '+str(rang))
+        tkMessageBox.showinfo('Media Found','Total  media with the  tag  : '+str(rang))
         for i in range(rang):
 
             print media['data'][i]['images']['standard_resolution']['url']
@@ -26,10 +26,13 @@ def tag_media(tag,comment):
             payloads = {'access_token': Access_token, 'text': comment}
             post_Cmmnt = requests.post(url, payloads).json()
             if post_Cmmnt['meta']['code'] == 200:
-                tkMessageBox.showinfo('Succesfull','Comment posted on image '+str(i+1))
+                print 'succesfull'
+                #tkMessageBox.showinfo('Succesfull','Comment posted on image :  '+str(i+1))
             else:
                 tkMessageBox.showinfo("Unsuccesfull","Could not post the comment")
             i+=1
+            if i==rang:
+                tkMessageBox.showinfo("Succesfull","Succesfully commented on all posts")
     else:
         tkMessageBox.showerror('Error','No media Found with the tag')
 
