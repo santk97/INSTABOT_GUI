@@ -1,6 +1,6 @@
 import Tkinter
 import ttk
-from function import  self ,get_self_media ,display_self_media , get_user_id ,get_user_media , display_umedia , put_like ,post_comment
+from function import  self ,get_self_media ,display_self_media , get_user_id ,get_user_media , display_umedia , fetch_comments,put_like ,post_comment
 from maintool import tag_media
 master=Tkinter.Tk()
 master.title('InstaBot')
@@ -26,19 +26,21 @@ user_frame=Tkinter.LabelFrame(master,text="User",fg='red',font=(None,20))
 user_frame.configure(background='black')
 user_frame.grid(row=9,column=0,padx=(10,10))
 username=Tkinter.StringVar()
+username.set('tourism._nepal')
+
 Tkinter.Label(user_frame,text='Enter Username :',fg='green').grid(row=8,column=0)
 enter_user=Tkinter.Entry(user_frame,width=15,textvariable=username).grid(row=9,column=0)
-
 user_det_but=Tkinter.Button(user_frame,text="Show Details",fg='green',command= lambda  : get_user_id(username.get())).grid(column=1,row=9,padx=(10))
 i2=Tkinter.StringVar()
 Tkinter.Label(user_frame,text='Choose media number:',fg='green').grid(row=8,column=2)
 media_no2=ttk.Combobox(user_frame,width=12,textvariable=i2)
 media_no2['values']=(1,2,3,4,5,6,7,8,9)
-media_no2.set(0)
+media_no2.set(1)
 media_no2.grid(row=9,column=2,pady=(10))
 downld_user_media=Tkinter.Button(user_frame,text='Download',fg='green',command=lambda: get_user_media(username.get(),media_no2.get())).grid(row=9,column=3,pady=(10))
 show_user_media=Tkinter.Button(user_frame,text='Show media',fg='green',command=lambda : display_umedia(media_no2.get())).grid(row=9,column=4,padx=(10,10),pady=(10))
 commenttext=Tkinter.StringVar()
+fetch_comment=Tkinter.Button(user_frame,text='Fetch Comments',fg='green',command=lambda : fetch_comments(username.get(),media_no2.get())).grid(row=10,column=0,pady=(10),padx=(10))
 Tkinter.Label(user_frame,text='Post a Comment :',fg='green').grid(row=10,column=1, padx=(10,10),pady=(10))
 enter_commnt=Tkinter.Entry(user_frame,width=15,fg='green',textvariable=commenttext).grid(row=10,column=2,padx=(10,10),pady=(10))
 cmmnt_but=Tkinter.Button(user_frame,text='Post Comment',fg='green',command= lambda : post_comment(username.get(),media_no2.get(),commenttext.get())).grid(row=10,column=3,padx=(10,10),pady=(10))
@@ -51,6 +53,7 @@ main_frame.configure(background='black')
 main_frame.grid(row=15,column=0,pady=(10))
 commnt=Tkinter.StringVar()
 tagname=Tkinter.StringVar()
+
 #Tkinter.Label(main_frame,text='Enter the Username :',fg='blue').grid(row=16,column=0,padx=(10,10))
 #enter_uname=Tkinter.Entry(main_frame,width=15,fg='blue').grid(row=17,column=0,padx=(10,10),pady=(10))
 Tkinter.Label(main_frame,text='Enter the Tag name you want to search :',fg='blue').grid(row=17,column=0,pady=(10))

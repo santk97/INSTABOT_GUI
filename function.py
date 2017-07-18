@@ -217,3 +217,38 @@ def post_comment(username,i,comment):
         tkMessageBox.showinfo('Unsuccesfull', "Comment Not Posted!!!")
 
 
+def fetch_comments(username,i):
+    if len(username) == 0:
+        tkMessageBox.showwarning('ERROR', 'Name can not be empty')
+    branch=Tkinter.Tk()
+    branch.configure(background='black')
+    url = (base + 'users/search?q=%s&access_token=%s') % (username, Access_token)
+    print url
+    user_id = requests.get(url).json()
+    val = int(i) - 1
+    print val
+    path = 'usermedia_%s_.jpg' % (str(i))
+    if len(user_id['data']):
+        use_id = user_id['data'][0]['id']
+    url = (base + 'users/%s/media/recent/?access_token=%s') % (use_id, Access_token)
+    user_media = requests.get(url).json()
+    if user_media['data'][0]['images']:
+        print 'url is ', user_media['data'][val]['images']['standard_resolution']['url']
+        # urllib.urlretrieve(user_media['data'][val]['images']['standard_resolution']['url'], path)
+        # print 'the image has been succesfully downloaded'
+        media_id = user_media['data'][val]['id']
+        print 'user media id =', user_media['data'][0]['id']
+    url=base+'media/%s/comments?access_token=%s' %(media_id,Access_token)
+    comment_list=requests.get(url).json()
+    print comment_list
+    if comment_list['meta']['code']==200:
+        if len(comment_list['data'])>0:
+            for x in range(len(comment_list['data'])):
+                Tkinter.Label(branch,text=str(x+1)+' . ' + comment_list['data'][x]['from']['full_name']+' : '+comment_list['data'][x]['text'],fg='blue',font=(None,20)).grid(row=x,column=1)
+
+        else :
+            tkMessageBox.showerror('Alert','No comment Found')
+
+    else :
+        tkMessageBox.showerror('Error','Code other than 200 recieved')
+    branch.mainloop()
