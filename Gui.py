@@ -5,7 +5,7 @@
 import Tkinter
 import ttk
 #importing functions from the functions.py file and the maintool.py file
-from function import  self ,get_self_media ,display_self_media , get_user_id ,get_user_media , display_umedia , fetch_comments,put_like ,post_comment
+from function import  self ,get_self_media ,display_self_media , get_user_id ,get_user_media , display_umedia , fetch_comments,put_like ,post_comment,min_likes,max_likes
 from maintool import tag_media
 master=Tkinter.Tk()
 master.title('InstaBot')
@@ -45,11 +45,13 @@ media_no2.grid(row=9,column=2,pady=(10))
 downld_user_media=Tkinter.Button(user_frame,text='Download',fg='green',command=lambda: get_user_media(username.get(),media_no2.get())).grid(row=9,column=3,pady=(10))
 show_user_media=Tkinter.Button(user_frame,text='Show media',fg='green',command=lambda : display_umedia(media_no2.get())).grid(row=9,column=4,padx=(10,10),pady=(10))
 commenttext=Tkinter.StringVar()
-fetch_comment=Tkinter.Button(user_frame,text='View Comments',fg='green',command=lambda : fetch_comments(username.get(),media_no2.get())).grid(row=10,column=0,pady=(10),padx=(10))
-Tkinter.Label(user_frame,text='Post a Comment :',fg='green').grid(row=10,column=1, padx=(10,10),pady=(10))
-enter_commnt=Tkinter.Entry(user_frame,width=15,fg='green',textvariable=commenttext).grid(row=10,column=2,padx=(10,10),pady=(10))
-cmmnt_but=Tkinter.Button(user_frame,text='Post Comment',fg='green',command= lambda : post_comment(username.get(),media_no2.get(),commenttext.get())).grid(row=10,column=3,padx=(10,10),pady=(10))
-like_but =Tkinter.Button(user_frame,text='Like!!!',fg='green',command=lambda: put_like(username.get(),media_no2.get())).grid(row=10,column=4,padx=(10,10),pady=(10))
+min_likes_but=Tkinter.Button(user_frame,text="show media with MIN likes",fg='green',command = lambda : min_likes(username.get())).grid(row=10,column=0,padx=(10),pady=(10))
+max_likes_but=Tkinter.Button(user_frame,text="show media with MAX likes",fg='green',command = lambda : max_likes(username.get())).grid(row=10,column=1,padx=(10),pady=(10))
+fetch_comment=Tkinter.Button(user_frame,text='View Comments',fg='green',command=lambda : fetch_comments(username.get(),media_no2.get())).grid(row=10,column=2,pady=(10),padx=(10))
+Tkinter.Label(user_frame,text='Post a Comment :',fg='green').grid(row=10,column=3, padx=(10,10),pady=(10))
+enter_commnt=Tkinter.Entry(user_frame,width=15,fg='green',textvariable=commenttext).grid(row=10,column=4,padx=(10,10),pady=(10))
+cmmnt_but=Tkinter.Button(user_frame,text='Post Comment',fg='green',command= lambda : post_comment(username.get(),media_no2.get(),commenttext.get())).grid(row=10,column=5,padx=(10,10),pady=(10))
+like_but =Tkinter.Button(user_frame,text='Like!!!',fg='green',command=lambda: put_like(username.get(),media_no2.get())).grid(row=10,column=6,padx=(10,10),pady=(10))
 
 #*-----*----*-----*----*---GUI for the marketing tool part--*----*-----*--*-----*----*-----*----*-----*----*-----*--*-----*----*-----*----*-----*----*-----*--*-----*----*-----*----*-----*----*-----*--*-----*----*-----*----*-----*----*-----*--*-----*----*-----*----*-----*----*-----*--
 #*-----*----*-----*----*-----*----*-----*--*-----*----*-----*----*-----*----*-----*--*-----*----*-----*----*-----*----*-----*--*-----*----*-----*----*-----*----*-----*--*-----*----*-----*----*-----*----*-----*--*-----*----*-----*----*-----*----*-----*--

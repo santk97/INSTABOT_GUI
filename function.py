@@ -178,7 +178,7 @@ def put_like(username,i):
     user_id=requests.get(url).json()
     val = int(i) - 1
     print val
-    path = 'usermedia_%s_.jpg' % (str(i))
+
     if len(user_id['data']):
         use_id = user_id['data'][0]['id']
     url = (base + 'users/%s/media/recent/?access_token=%s') % (use_id, Access_token)
@@ -271,5 +271,90 @@ def fetch_comments(username,i):
     else :
         tkMessageBox.showerror('Error','Code other than 200 recieved')
     branch.mainloop()
+
+
+#method to find the media with the minimun likes
+#it downloads the image and then displays it
+def min_likes(username):
+    if len(username)==0:
+        tkMessageBox.showwarning('ERROR','Name can not be empty')
+
+    url=(base+'users/search?q=%s&access_token=%s') %(username,Access_token)
+    print url
+    user_id=requests.get(url).json()
+    if len(user_id['data'] ):
+            use_id=user_id['data'][0]['id']
+    url=(base+'users/%s/media/recent/?access_token=%s')%(use_id,Access_token)
+    user_media=requests.get(url).json()
+    if user_media['meta']['code']:
+        list=[]
+        count=0
+        for x in  range(len(user_media['data'])):
+            count=user_media['data'][x]['likes']['count']
+            list.append(count)
+    else:
+        tkMessageBox.showerror('Error','Code other than 200')
+    list=sorted(list)
+    print list
+    for x in range(len(user_media['data'])):
+        path='min_like%s.jpg' %(str(x))
+        if list[0]==user_media['data'][x]['likes']['count']:
+            urllib.urlretrieve(user_media['data'][x]['images']['standard_resolution']['url'], path)
+            print 'the image has been succesfully downloaded'
+            branch = Tkinter.Toplevel()
+            branch.title('Media')
+            branch.configure(background='black')
+            canvas = Tkinter.Canvas(branch, width=500, height=500)
+
+            canvas.pack()
+            im = Image.open(path)
+            im = im.convert('RGB')
+            im.save(path + '.pgm')
+            img = Tkinter.PhotoImage(file=path + ".pgm")
+            canvas.create_image(40, 40, image=img, anchor='nw')
+            branch.mainloop()
+#this methos is similar to the min likes methos but with a slight change
+#it find the media with the maximum likes
+def max_likes(username):
+                if len(username) == 0:
+                    tkMessageBox.showwarning('ERROR', 'Name can not be empty')
+
+                url = (base + 'users/search?q=%s&access_token=%s') % (username, Access_token)
+                print url
+                user_id = requests.get(url).json()
+                if len(user_id['data']):
+                    use_id = user_id['data'][0]['id']
+                url = (base + 'users/%s/media/recent/?access_token=%s') % (use_id, Access_token)
+                user_media = requests.get(url).json()
+                if user_media['meta']['code']:
+                    list = []
+                    count = 0
+                    for x in range(len(user_media['data'])):
+                        count = user_media['data'][x]['likes']['count']
+                        list.append(count)
+
+
+
+                else:
+                    tkMessageBox.showerror('Error', 'Code other than 200')
+                list = sorted(list)
+                print list
+                for x in range(len(user_media['data'])):
+                    path = 'min_like%s.jpg' % (str(x))
+                    if max(list) == user_media['data'][x]['likes']['count']:
+                        urllib.urlretrieve(user_media['data'][x]['images']['standard_resolution']['url'], path)
+                        print 'the image has been succesfully downloaded'
+                        branch = Tkinter.Toplevel()
+                        branch.title('Media')
+                        branch.configure(background='black')
+                        canvas = Tkinter.Canvas(branch, width=500, height=500)
+
+                        canvas.pack()
+                        im = Image.open(path)
+                        im = im.convert('RGB')
+                        im.save(path + '.pgm')
+                        img = Tkinter.PhotoImage(file=path + ".pgm")
+                        canvas.create_image(40, 40, image=img, anchor='nw')
+                        branch.mainloop()
 
 #these are the functions that have been used
