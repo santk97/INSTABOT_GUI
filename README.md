@@ -8,4 +8,4 @@ Thus it can be used to promote products by companies based on the hashtag of the
 
 
 Hope, you like using the application.
-                                                                                        By- ______Sant________
+                                                                                        By- ______Sant K.S________
